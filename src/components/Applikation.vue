@@ -2,7 +2,7 @@
 <template>
   <div class="applikation-container">
     <SvgIcons />
-    <h3>Navigation</h3>
+    <h3>Navigation!</h3>
     <div>
       Eksempel på simpel navigation inde i leverandør-applikationen, hvor visning af trin styres med Vue v-show direktiv. Det er applikationen selv,
       som skal lytte på <strong>hashchange</strong> event, og efterfølgende implementere logikken når # ændres.

@@ -1,4 +1,3 @@
-<!-- Indgangspunktet for sandkasse-applikationen. Direkte og indirekte importering af komponenter og stylesheets i denne klasse vil blive inkluderet i den endelig applikation. -->
 <template>
   <div class="step col-lg-7">
     <h2 class="h1">{{ questions[step] }}</h2>

@@ -1,11 +1,8 @@
-<!-- Indgangspunktet for sandkasse-applikationen. Direkte og indirekte importering af komponenter og stylesheets i denne klasse vil blive inkluderet i den endelig applikation. -->
 <template>
   <div class="row">
-    <div class="col-12">
-      <Forside v-if="currentStep === guideStep.FORSIDE" @start="start" />
-      <Resultat v-else-if="currentStep === guideStep.RESULTAT" :answers="answers" />
-      <Step v-else :key="currentStep" :step="currentStep" @back="stepBack" @forward="stepForward" />
-    </div>
+    <Forside v-if="currentStep === guideStep.FORSIDE" @start="start" />
+    <Resultat v-else-if="currentStep === guideStep.RESULTAT" :answers="answers" />
+    <Step v-else :key="currentStep" :step="currentStep" @back="stepBack" @forward="stepForward" />
   </div>
 </template>
 

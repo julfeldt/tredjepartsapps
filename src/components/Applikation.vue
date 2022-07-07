@@ -1,44 +1,43 @@
 <!-- Indgangspunktet for sandkasse-applikationen. Direkte og indirekte importering af komponenter og stylesheets i denne klasse vil blive inkluderet i den endelig applikation. -->
 <template>
-  <div class="applikation-container"><h1>@TNB: Implementér awesome guide</h1></div>
+  <div class="row">
+    <div class="col-12">
+      <Forside v-if="currentStep === guideStep.FORSIDE" @start="start" />
+      <Resultat v-else-if="currentStep === guideStep.RESULTAT" :answers="answers" />
+      <Step v-else :key="currentStep" :step="currentStep" @back="stepBack" @forward="stepForward" />
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
-import axios from 'axios';
-import SvgIcons from './SvgIcons.vue';
-import * as DKFDS from 'dkfds';
 import * as DataEvent from '@erst-vg/piwik-event-wrapper';
-
-export interface Variant {
-  navn: string;
-  aktiv: boolean;
-  parametre: {
-    parameternavn: string;
-    parametervaerdi: string;
-  }[];
-}
+import Forside from './content/Forside.vue';
+import Resultat from './content/Resultat.vue';
+import Step from './content/Step.vue';
+import { GuideStep } from '../enums/guideStep.enum';
+import { GuideAnswer } from '../enums/guideAnswer.enum';
 
 export default {
   name: 'Applikation',
   components: {
-    SvgIcons
-  },
-  props: {
-    variant: {
-      type: Object as () => Variant,
-      default: null,
-      required: false
-    }
+    Forside,
+    Resultat,
+    Step
   },
 
   data() {
     return {
-      response: {},
-      error: false,
-      pending: false,
-      step: 1,
-      maxStep: 3,
-      reactiveKey: 1
+      currentStep: GuideStep.FORSIDE,
+      guideStep: GuideStep,
+      steps: [],
+      answers: [],
+      stepGraph: {
+        [GuideStep.STEP_1]: { [GuideAnswer.FIRST]: GuideStep.STEP_2_EN, [GuideAnswer.SECOND]: GuideStep.STEP_2_FLERE },
+        [GuideStep.STEP_2_EN]: { [GuideAnswer.FIRST]: GuideStep.STEP_3_JA, [GuideAnswer.SECOND]: GuideStep.STEP_3_NEJ },
+        [GuideStep.STEP_2_FLERE]: { [GuideAnswer.FIRST]: GuideStep.RESULTAT, [GuideAnswer.SECOND]: GuideStep.STEP_3_NEJ },
+        [GuideStep.STEP_3_JA]: { [GuideAnswer.FIRST]: GuideStep.RESULTAT, [GuideAnswer.SECOND]: GuideStep.RESULTAT },
+        [GuideStep.STEP_3_NEJ]: { [GuideAnswer.FIRST]: GuideStep.RESULTAT, [GuideAnswer.SECOND]: GuideStep.RESULTAT }
+      }
     };
   },
 
@@ -50,43 +49,19 @@ export default {
       return this.variant?.navn ?? 'default';
     }
   },
-  mounted() {
-    this.callAPI();
-    new DKFDS.Accordion(document.getElementById('accordion-element'));
-  },
-  created() {
-    /**
-     * Lyt på Vuex store ændringer, og opdater reactiveKey hver gang der committes en Vuex mutation. Man kan evt. bruge mutation type
-     * til at styre om og hvornår den skal opdateres eller lytte på noget mere specifikt.
-     */
-    this.$store.subscribe(() => {
-      this.reactiveKey++;
-    });
-    window.location.hash = '1';
-    window.addEventListener('hashchange', this.updateStepFromHash);
-  },
-  destroyed() {
-    window.addEventListener('hashchange', this.updateStepFromHash);
-  },
   methods: {
-    callAPI(fail = false) {
-      this.pending = true;
-      this.error = false;
-      const id = fail ? 'NaN' : 1;
-      axios
-        .get(`https://jsonplaceholder.typicode.com/todos/${id}`)
-        .then(({ data }) => {
-          // Vil sørge for response data vises i DOM
-          this.response = data;
-        })
-        .catch(() => {
-          // vil sørge for fejlbeskeder vises i DOM
-          this.error = true;
-        })
-        .finally(() => {
-          // vil sørge for loading spinner skjules
-          this.pending = false;
-        });
+    start() {
+      this.steps.push(GuideStep.FORSIDE);
+      this.currentStep = GuideStep.STEP_1;
+    },
+    stepBack() {
+      this.currentStep = (this.steps as GuideStep[]).pop() ?? GuideStep.FORSIDE;
+      (this.answers as GuideAnswer[]).pop();
+    },
+    stepForward(answer: GuideAnswer) {
+      (this.steps as GuideStep[]).push(this.currentStep);
+      (this.answers as GuideAnswer[]).push(answer);
+      this.currentStep = this.stepGraph[this.currentStep][answer];
     },
     decreaseStep() {
       if (window.location.hash !== '#1') {
@@ -128,20 +103,6 @@ export default {
       };
       DataEvent.emitFritekstEvent(this, 'eventType', JSON.stringify(data));
     }
-  },
-  provide() {
-    // Gør 'reactiveKey' tilgængelig for underkomponenter (uanset dybde), som kan bruges til at sørge for Vuex getters er reaktive.
-    const reactiveKey = {};
-    Object.defineProperty(reactiveKey, 'value', {
-      enumerable: true,
-      get: () => this.reactiveKey
-    });
-    return {
-      reactiveKey
-    };
   }
 };
 </script>
-<style lang="scss" scoped>
-@import '../styles/components/_applikation.scss';
-</style>

@@ -1,0 +1,9 @@
+export enum GuideStep {
+  FORSIDE = 'FORSIDE',
+  STEP_1 = 'STEP_1',
+  STEP_2_EN = 'STEP_2_EN',
+  STEP_2_FLERE = 'STEP_2_FLERE',
+  STEP_3_JA = 'STEP_3_JA',
+  STEP_3_NEJ = 'STEP_3_NEJ',
+  RESULTAT = 'RESULTAT'
+}

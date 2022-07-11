@@ -14,6 +14,7 @@ import Step from './content/Step.vue';
 import { GuideStep } from '../enums/guideStep.enum';
 import { GuideAnswer } from '../enums/guideAnswer.enum';
 import { titles } from '../utils/title.util';
+import Vue from 'vue';
 
 export default {
   name: 'Applikation',
@@ -37,10 +38,6 @@ export default {
         [GuideStep.STEP_3_NEJ]: { [GuideAnswer.FIRST]: GuideStep.RESULTAT, [GuideAnswer.SECOND]: GuideStep.RESULTAT }
       }
     };
-  },
-
-  created() {
-    this.reset();
   },
 
   methods: {
@@ -72,8 +69,9 @@ export default {
         this.emitPiwikEvent(title);
       }
     },
-    emitPiwikEvent(title: string) {
+    async emitPiwikEvent(title: string) {
       window.location.hash = title;
+      await Vue.nextTick();
       DataEvent.emitPageViewEvent(this);
     }
   }

@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <Forside v-if="currentStep === guideStep.FORSIDE" @start="start" />
-    <Resultat v-else-if="currentStep === guideStep.RESULTAT" :answers="answers" />
+    <Resultat v-else-if="currentStep === guideStep.RESULTAT" :answers="answers" @reset="reset" @emitPiwikEvent="emitPiwikEvent" />
     <Step v-else :key="currentStep" :step="currentStep" @back="stepBack" @forward="stepForward" />
   </div>
 </template>
@@ -13,6 +13,7 @@ import Resultat from './content/Resultat.vue';
 import Step from './content/Step.vue';
 import { GuideStep } from '../enums/guideStep.enum';
 import { GuideAnswer } from '../enums/guideAnswer.enum';
+import { titles } from '../utils/title.util';
 
 export default {
   name: 'Applikation',
@@ -38,67 +39,42 @@ export default {
     };
   },
 
-  computed: {
-    variantColor: function () {
-      return this.variant?.parametre[0].parametervaerdi ?? '#C0C0C0';
-    },
-    variantName: function () {
-      return this.variant?.navn ?? 'default';
-    }
+  created() {
+    this.reset();
   },
+
   methods: {
     start() {
       this.steps.push(GuideStep.FORSIDE);
       this.currentStep = GuideStep.STEP_1;
+      this.tryEmitPiwikEvent();
     },
     stepBack() {
       this.currentStep = (this.steps as GuideStep[]).pop() ?? GuideStep.FORSIDE;
       (this.answers as GuideAnswer[]).pop();
+      this.tryEmitPiwikEvent();
     },
     stepForward(answer: GuideAnswer) {
       (this.steps as GuideStep[]).push(this.currentStep);
       (this.answers as GuideAnswer[]).push(answer);
       this.currentStep = this.stepGraph[this.currentStep][answer];
+      this.tryEmitPiwikEvent();
     },
-    decreaseStep() {
-      if (window.location.hash !== '#1') {
-        const { hash, pathname } = window.location;
-        const previousHash = String(parseInt(this.removeHash(hash), 10) - 1);
-        const previousUrl = pathname + '#' + previousHash;
-        DataEvent.emitForrigeEvent(this, previousUrl);
-        window.location.hash = previousHash;
+    reset() {
+      this.currentStep = GuideStep.FORSIDE;
+      this.steps = [];
+      this.answers = [];
+      this.tryEmitPiwikEvent();
+    },
+    tryEmitPiwikEvent() {
+      const title = titles[this.currentStep as GuideStep];
+      if (title) {
+        this.emitPiwikEvent(title);
       }
     },
-    increaseStep() {
-      if (window.location.hash !== '#' + this.maxStep) {
-        const { hash, pathname } = window.location;
-        const previousHash = String(parseInt(this.removeHash(hash), 10) + 1);
-        const nextUrl = pathname + '#' + previousHash;
-        DataEvent.emitNaesteEvent(this, nextUrl);
-        window.location.hash = previousHash;
-      }
-    },
-    updateStepFromHash() {
-      const { hash } = window.location;
-      this.step = hash ? parseInt(this.removeHash(hash), 10) : 1;
+    emitPiwikEvent(title: string) {
+      window.location.hash = title;
       DataEvent.emitPageViewEvent(this);
-    },
-    removeHash(hash: string) {
-      return hash.replaceAll('#', '');
-    },
-    // Data opsamlingsmetoder
-    emitDownloadEvent() {
-      DataEvent.emitDownloadEvent(this, 'doc.pfd', 'download data');
-    },
-    emitCTAClickEvent() {
-      DataEvent.emitCTAClickEvent(this, 'eventType', 'CTA data');
-    },
-    emitFritekstEvent() {
-      const data = {
-        step: this.step,
-        maxStep: this.maxStep
-      };
-      DataEvent.emitFritekstEvent(this, 'eventType', JSON.stringify(data));
     }
   }
 };

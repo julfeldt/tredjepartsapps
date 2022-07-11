@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="h1">Det tyder på, at du kan overveje at starte en enkeltmandsvirksomhed.</h2>
+    <h2 class="h1">{{ title }}</h2>
     <p class="mt-8">Væsentligste kendetegn ved enkeltmandsvirksomheder:</p>
     <ul>
       <li><p>Kun én ejer, der alene træffer alle beslutninger.</p></li>
@@ -64,6 +64,16 @@
 
 <script lang="ts">
 export default {
-  name: 'Enkeltmandsvirksomhed'
+  name: 'Enkeltmandsvirksomhed',
+
+  data() {
+    return {
+      title: 'Det tyder på, at du kan overveje at starte en enkeltmandsvirksomhed.'
+    };
+  },
+
+  created() {
+    this.$emit('emitPiwikEvent', this.title);
+  }
 };
 </script>

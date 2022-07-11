@@ -1,6 +1,6 @@
 <template>
   <div class="forside col-lg-7">
-    <h2 class="h1">Guide: Vælg virksomhedsform</h2>
+    <h2 class="h1">{{ title }}</h2>
     <div class="mt-8">
       Svar på 3 spørgsmål, og få en vurdering af, hvilken virksomhedsform du kan vælge.
       <br /><br />
@@ -13,7 +13,16 @@
 </template>
 
 <script lang="ts">
+import { GuideStep } from '../../enums/guideStep.enum';
+import { titles } from '../../utils/title.util';
+
 export default {
-  name: 'Forside'
+  name: 'Forside',
+
+  data() {
+    return {
+      title: titles[GuideStep.FORSIDE]
+    };
+  }
 };
 </script>

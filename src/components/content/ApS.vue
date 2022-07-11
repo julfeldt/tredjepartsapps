@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="h1">Det tyder på, at du kan overveje at starte et anpartsselskab (ApS).</h2>
+    <h2 class="h1">{{ title }}</h2>
     <p class="mt-8">Resultatet er kun vejledende, og vi anbefaler, at du søger rådgivning inden stiftelse af et anpartsselskab.</p>
     <h2>Væsentligste kendetegn ved ApS:</h2>
     <ul>
@@ -54,6 +54,16 @@
 
 <script lang="ts">
 export default {
-  name: 'Enkeltmandsvirksomhed'
+  name: 'Enkeltmandsvirksomhed',
+
+  data() {
+    return {
+      title: 'Det tyder på, at du kan overveje at starte et anpartsselskab (ApS).'
+    };
+  },
+
+  created() {
+    this.$emit('emitPiwikEvent', this.title);
+  }
 };
 </script>

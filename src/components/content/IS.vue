@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="h1">Det tyder på, at du kan overveje at starte et interessentskab (I/S).</h2>
+    <h2 class="h1">{{ title }}</h2>
     <p class="mt-8">Væsentligste kendetegn ved interessentskaber:</p>
     <ul>
       <li><p>Mindst to ejere, der kan være både personer og virksomheder.</p></li>
@@ -44,6 +44,16 @@
 
 <script lang="ts">
 export default {
-  name: 'Enkeltmandsvirksomhed'
+  name: 'Enkeltmandsvirksomhed',
+
+  data() {
+    return {
+      title: 'Det tyder på, at du kan overveje at starte et interessentskab (I/S).'
+    };
+  },
+
+  created() {
+    this.$emit('emitPiwikEvent', this.title);
+  }
 };
 </script>

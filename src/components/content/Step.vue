@@ -1,6 +1,6 @@
 <template>
   <div class="step col-lg-7">
-    <h2 class="h1">{{ questions[step] }}</h2>
+    <h2 class="h1">{{ titles[step] }}</h2>
     <div class="form-group mt-8">
       <fieldset>
         <ul class="nobullet-list">
@@ -26,15 +26,17 @@
 </template>
 
 <script lang="ts">
+import { PropType } from 'vue';
 import { GuideAnswer } from '../../enums/guideAnswer.enum';
 import { GuideStep } from '../../enums/guideStep.enum';
+import { titles } from '../../utils/title.util';
 
 export default {
   name: 'Step',
 
   props: {
     step: {
-      type: Object as () => GuideStep,
+      type: Object as PropType<GuideStep>,
       required: true
     }
   },
@@ -43,13 +45,7 @@ export default {
     return {
       chosen: null,
       guideAnswer: GuideAnswer,
-      questions: {
-        [GuideStep.STEP_1]: '1. Hvor mange ejere skal din virksomhed have?',
-        [GuideStep.STEP_2_EN]: '2. Vil du hæfte personligt for virksomhedens eventuelle gæld?',
-        [GuideStep.STEP_2_FLERE]: '2. Vil I hæfte personligt for virksomhedens eventuelle gæld?',
-        [GuideStep.STEP_3_JA]: '3. Forventer du, at virksomheden skal omsætte for mere end 50.000 kr. om året?',
-        [GuideStep.STEP_3_NEJ]: '3. Hvor stort et beløb kan du indskyde som selskabskapital?'
-      },
+      titles,
       answers: {
         [GuideStep.STEP_1]: {
           [GuideAnswer.FIRST]: 'Jeg skal eje virksomheden alene',

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="h1">Det tyder på, at du kan overveje at starte en personligt ejet mindre virksomhed (PMV).</h2>
+    <h2 class="h1">{{ title }}</h2>
     <p class="mt-8">
       Vær opmærksom på, at hvis du tjener under 50.000 kr. om året, er du ikke forpligtet til at registrere en virksomhed. Dog kan en PMV være en
       mulighed, hvis du fx ønsker et CVR-nummer.
@@ -77,6 +77,16 @@
 
 <script lang="ts">
 export default {
-  name: 'Enkeltmandsvirksomhed'
+  name: 'Enkeltmandsvirksomhed',
+
+  data() {
+    return {
+      title: 'Det tyder på, at du kan overveje at starte en personligt ejet mindre virksomhed (PMV).'
+    };
+  },
+
+  created() {
+    this.$emit('emitPiwikEvent', this.title);
+  }
 };
 </script>

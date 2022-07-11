@@ -1,5 +1,13 @@
 <template>
-  <component :is="component" class="reultat col-lg-7"> </component>
+  <div class="reultat col-lg-7">
+    <a href="" @click="$emit('reset')">
+      <svg class="icon-svg">
+        <use xlink:href="#arrow-left" /></svg
+      >Start forfra</a
+    >
+    <component :is="component" @emitPiwikEvent="emitPiwikEvent" />
+    <button class="button button-tertiary" @click="$emit('reset')">Start forfra</button>
+  </div>
 </template>
 
 <script lang="ts">
@@ -9,6 +17,7 @@ import PMV from './PMV.vue';
 import ApS from './ApS.vue';
 import AS from './AS.vue';
 import IS from './IS.vue';
+import { PropType } from 'vue';
 
 export default {
   name: 'Resultat',
@@ -22,7 +31,7 @@ export default {
 
   props: {
     answers: {
-      type: Object as () => GuideAnswer[],
+      type: Object as PropType<GuideAnswer[]>,
       required: true
     }
   },
@@ -47,6 +56,12 @@ export default {
         default:
           return 'Enkeltmandsvirksomhed';
       }
+    }
+  },
+
+  methods: {
+    emitPiwikEvent(title: string) {
+      this.$emit('emitPiwikEvent', title);
     }
   }
 };

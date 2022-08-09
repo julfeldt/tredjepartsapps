@@ -2,24 +2,17 @@
   <div>
     <div id="app" class="app-body" tabindex="-1">
       <div class="flexgrow container pt-8 pb-8">
-        <Applikation
-          :variant="variant"
-          :is-logged-in="isLoggedIn"
-          :token="token"
-          :bruger="bruger"
-          @piwikPageView="onPiwikPageView"
-          @piwikNaesteEvent="onPiwikNaesteEvent"
-          @piwikForrigeEvent="onPiwikForrigeEvent"
-          @piwikDownloadEvent="onPiwikDownloadEvent"
-          @piwikCTAClickEvent="onPiwikCTAClickEvent"
-          @piwikFritekstEvent="onPiwikFritekstEvent"
-          @requestToken="onRequestToken"
-        />
+        <Applikation />
       </div>
     </div>
   </div>
 </template>
 
+<script setup lang="ts">
+import Applikation from './components/Applikation.vue';
+</script>
+
+<!--
 <script lang="ts">
 // INFO: Bemærk ændringer til denne fil, vil ikke blive inkluderet i den endelige applikation
 import Applikation from './components/Applikation.vue';
@@ -116,6 +109,8 @@ export default {
   }
 };
 </script>
+-->
+
 <style scoped lang="scss">
 @import 'styles/_app.scss';
 </style>

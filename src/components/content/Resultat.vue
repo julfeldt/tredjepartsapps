@@ -3,31 +3,22 @@
     <a href="" @click="$emit('reset')">
       <svg class="icon-svg">
         <use xlink:href="#arrow-left" /></svg
-      >Start forfra</a
+      >{{ $t(vaelg - virksomhedsform.sporgsmaal.resultat.forfra) }}</a
     >
-    <component :is="component" @emitPiwikEvent="emitPiwikEvent" />
-    <button class="button button-tertiary" @click="$emit('reset')">Start forfra</button>
+    <div>
+      <h2 class="h1">{{ $(content.title) }}</h2>
+      <div v-html="$(content.result)" />
+    </div>
+    <button class="button button-tertiary" @click="$emit('reset')">{{ $t(vaelg - virksomhedsform.sporgsmaal.resultat.forfra) }}</button>
   </div>
 </template>
 
 <script lang="ts">
 import { GuideAnswer } from '../../enums/guideAnswer.enum';
-import Enkeltmandsvirksomhed from './Enkeltmandsvirksomhed.vue';
-import PMV from './PMV.vue';
-import ApS from './ApS.vue';
-import AS from './AS.vue';
-import IS from './IS.vue';
 import { PropType } from 'vue';
 
 export default {
   name: 'Resultat',
-  components: {
-    Enkeltmandsvirksomhed,
-    PMV,
-    ApS,
-    AS,
-    IS
-  },
 
   props: {
     answers: {
@@ -37,32 +28,36 @@ export default {
   },
 
   computed: {
-    component() {
+    content() {
       switch (JSON.stringify(this.answers)) {
         case JSON.stringify([GuideAnswer.FIRST, GuideAnswer.FIRST, GuideAnswer.FIRST]):
-          return 'Enkeltmandsvirksomhed';
+          return {
+            title: 'vaelg-virksomhedsform.sporgsmaal.resultat.emkeltmand.title',
+            text: 'vaelg-virksomhedsform.sporgsmaal.resultat.emkeltmand.text'
+          };
         case JSON.stringify([GuideAnswer.FIRST, GuideAnswer.FIRST, GuideAnswer.SECOND]):
-          return 'PMV';
+          return { title: 'vaelg-virksomhedsform.sporgsmaal.resultat.pmv.title', text: 'vaelg-virksomhedsform.sporgsmaal.resultat.pmv.text' };
         case JSON.stringify([GuideAnswer.FIRST, GuideAnswer.SECOND, GuideAnswer.FIRST]):
-          return 'ApS';
+          return { title: 'vaelg-virksomhedsform.sporgsmaal.resultat.aps.title', text: 'vaelg-virksomhedsform.sporgsmaal.resultat.aps.text' };
         case JSON.stringify([GuideAnswer.FIRST, GuideAnswer.SECOND, GuideAnswer.SECOND]):
-          return 'AS';
+          return { title: 'vaelg-virksomhedsform.sporgsmaal.resultat.as.title', text: 'vaelg-virksomhedsform.sporgsmaal.resultat.as.text' };
         case JSON.stringify([GuideAnswer.SECOND, GuideAnswer.FIRST]):
-          return 'IS';
+          return { title: 'vaelg-virksomhedsform.sporgsmaal.resultat.is.title', text: 'vaelg-virksomhedsform.sporgsmaal.resultat.is.text' };
         case JSON.stringify([GuideAnswer.SECOND, GuideAnswer.SECOND, GuideAnswer.FIRST]):
-          return 'ApS';
+          return { title: 'vaelg-virksomhedsform.sporgsmaal.resultat.aps.title', text: 'vaelg-virksomhedsform.sporgsmaal.resultat.aps.text' };
         case JSON.stringify([GuideAnswer.SECOND, GuideAnswer.SECOND, GuideAnswer.SECOND]):
-          return 'AS';
+          return { title: 'vaelg-virksomhedsform.sporgsmaal.resultat.as.title', text: 'vaelg-virksomhedsform.sporgsmaal.resultat.as.text' };
         default:
-          return 'Enkeltmandsvirksomhed';
+          return {
+            title: 'vaelg-virksomhedsform.sporgsmaal.resultat.emkeltmand.title',
+            text: 'vaelg-virksomhedsform.sporgsmaal.resultat.emkeltmand.text'
+          };
       }
     }
   },
 
-  methods: {
-    emitPiwikEvent(title: string) {
-      this.$emit('emitPiwikEvent', title);
-    }
+  created() {
+    this.$emit('emitPiwikEvent', this.$(this.content.title));
   }
 };
 </script>

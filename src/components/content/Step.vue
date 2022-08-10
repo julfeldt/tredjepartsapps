@@ -19,14 +19,15 @@
       </fieldset>
     </div>
     <div class="mt-4">
-      <button class="button button-tertiary" @click="$emit('back')">Tilbage</button>
-      <button class="button button-primary" :disabled="!chosen" @click="$emit('forward', chosen)">Næste</button>
+      <button class="button button-tertiary" @click="$emit('back')">{{ $t('vaelg-virksomhedsform.sporgsmaal.step.frem') }}</button>
+      <button class="button button-primary" :disabled="!chosen" @click="$emit('forward', chosen)">
+        {{ $t('vaelg-virksomhedsform.sporgsmaal.step.tilbage') }}
+      </button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { PropType } from 'vue';
 import { GuideAnswer } from '../../enums/guideAnswer.enum';
 import { GuideStep } from '../../enums/guideStep.enum';
 import { titles } from '../../utils/title.util';

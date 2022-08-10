@@ -36,12 +36,13 @@ export default {
         [GuideStep.STEP_2_FLERE]: { [GuideAnswer.FIRST]: GuideStep.RESULTAT, [GuideAnswer.SECOND]: GuideStep.STEP_3_NEJ },
         [GuideStep.STEP_3_JA]: { [GuideAnswer.FIRST]: GuideStep.RESULTAT, [GuideAnswer.SECOND]: GuideStep.RESULTAT },
         [GuideStep.STEP_3_NEJ]: { [GuideAnswer.FIRST]: GuideStep.RESULTAT, [GuideAnswer.SECOND]: GuideStep.RESULTAT }
-      }
+      },
+      titles
     };
   },
 
   created() {
-    window.location.hash = titles[GuideStep.FORSIDE];
+    window.location.hash = this.$t(titles[GuideStep.FORSIDE]);
   },
 
   methods: {
@@ -68,7 +69,7 @@ export default {
       this.tryEmitPiwikEvent();
     },
     tryEmitPiwikEvent() {
-      const title = titles[this.currentStep as GuideStep];
+      const title = this.$t(titles[this.currentStep as GuideStep]);
       if (title) {
         this.emitPiwikEvent(title);
       }

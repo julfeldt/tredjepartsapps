@@ -36,7 +36,7 @@ export default {
 
   props: {
     step: {
-      type: Object as PropType<GuideStep>,
+      type: String,
       required: true
     }
   },

@@ -3,13 +3,13 @@
     <a href="" @click="$emit('reset')">
       <svg class="icon-svg">
         <use xlink:href="#arrow-left" /></svg
-      >{{ $t(vaelg - virksomhedsform.sporgsmaal.resultat.forfra) }}</a
+      >{{ $t('virksomhedsform.sporgsmaal.resultat.forfra') }}</a
     >
     <div>
       <h2 class="h1">{{ $(content.title) }}</h2>
       <div v-html="$(content.result)" />
     </div>
-    <button class="button button-tertiary" @click="$emit('reset')">{{ $t(vaelg - virksomhedsform.sporgsmaal.resultat.forfra) }}</button>
+    <button class="button button-tertiary" @click="$emit('reset')">{{ $t('virksomhedsform.sporgsmaal.resultat.forfra') }}</button>
   </div>
 </template>
 

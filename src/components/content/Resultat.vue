@@ -7,7 +7,7 @@
     >
     <div>
       <h2 class="h1">{{ $t(content.title) }}</h2>
-      <div v-html="$t(content.result)" />
+      <div v-html="$t(content.text)" />
     </div>
     <button class="button button-tertiary" @click="$emit('reset')">{{ $t('vaelg-virksomhedsform.sporgsmaal.resultat.forfra') }}</button>
   </div>

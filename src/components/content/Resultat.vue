@@ -3,13 +3,13 @@
     <a href="" @click="$emit('reset')">
       <svg class="icon-svg">
         <use xlink:href="#arrow-left" /></svg
-      >{{ $t('virksomhedsform.sporgsmaal.resultat.forfra') }}</a
+      >{{ $t('vaelg-virksomhedsform.sporgsmaal.resultat.forfra') }}</a
     >
     <div>
       <h2 class="h1">{{ $t(content.title) }}</h2>
       <div v-html="$t(content.result)" />
     </div>
-    <button class="button button-tertiary" @click="$emit('reset')">{{ $t('virksomhedsform.sporgsmaal.resultat.forfra') }}</button>
+    <button class="button button-tertiary" @click="$emit('reset')">{{ $t('vaelg-virksomhedsform.sporgsmaal.resultat.forfra') }}</button>
   </div>
 </template>
 
@@ -57,7 +57,7 @@ export default {
   },
 
   created() {
-    this.$emit('emitPiwikEvent', this.$(this.content.title));
+    this.$emit('emitPiwikEvent', this.$t(this.content.title));
   }
 };
 </script>

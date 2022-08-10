@@ -4,8 +4,8 @@
     <div class="form-group mt-8">
       <fieldset>
         <ul class="nobullet-list">
-          <div class="form-group-radio">
-            <li v-for="answer in guideAnswer" :id="`li-${answer}`" :key="answer" class="mt-3">
+          <li v-for="answer in guideAnswer" :id="`li-${answer}`" :key="answer" class="mt-3">
+            <div class="form-group-radio">
               <input :id="`radio-${answer}`" type="radio" name="radio" :value="answer" class="form-radio radio-large" @click="chosen = answer" />
               <label :for="`radio-${answer}`">{{ $t(answers[step][answer]) }}</label>
               <div v-if="alerts[step][answer] && chosen === answer" role="alert" class="alert alert-info">
@@ -13,8 +13,8 @@
                   <p class="alert-text">{{ $t(alerts[step][answer]) }}</p>
                 </div>
               </div>
-            </li>
-          </div>
+            </div>
+          </li>
         </ul>
       </fieldset>
     </div>

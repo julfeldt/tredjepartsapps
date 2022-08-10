@@ -17,7 +17,7 @@
     <p>
       <a
         target="_blank"
-        href="https://virksomhedsguiden.dk/content/artikler/virksomhedsformer/overblik_over_virksomhedsformer/aktieselskab_a_s/"
+        href="https://virksomhedsguiden.dk/content/ydelser/aktieselskab-as/a50ff8c4-127a-4b5a-ab41-2617d88a5c55/"
         rel="noopener noreferrer nofollow"
         >Læs mere om A/S</a
       >

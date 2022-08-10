@@ -40,6 +40,10 @@ export default {
     };
   },
 
+  created() {
+    window.location.hash = titles[GuideStep.FORSIDE];
+  },
+
   methods: {
     start() {
       this.steps.push(GuideStep.FORSIDE);

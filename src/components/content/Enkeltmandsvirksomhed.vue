@@ -12,7 +12,7 @@
     <p>
       <a
         target="_blank"
-        href="https://virksomhedsguiden.dk/content/artikler/virksomhedsformer/overblik_over_virksomhedsformer/enkeltmandsvirksomhed/"
+        href="https://virksomhedsguiden.dk/content/ydelser/enkeltmandsvirksomhed/58819ce8-d4f7-4ae9-ac93-e957098edca4/"
         rel="noopener noreferrer nofollow"
         >Læs mere om enkeltmandsvirksomhed</a
       ><br /><a
@@ -54,7 +54,7 @@
     <p>
       <a
         target="_blank"
-        href="https://virksomhedsguiden.dk/content/artikler/skat_og_moms/moms_og_loensumsafgift/momsfritagelse_og_loensumsafgift/"
+        href="https://virksomhedsguiden.dk/content/ydelser/momsfritagelse-og-loensumsafgift/ed74d1a8-fe3a-4ece-b96d-3c5f5b665797/"
         rel="noopener noreferrer nofollow"
         >Læs mere om momsfritagelse og lønsumsafgift</a
       >

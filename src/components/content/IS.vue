@@ -13,7 +13,7 @@
     <p>
       <a
         target="_blank"
-        href="https://virksomhedsguiden.dk/content/artikler/virksomhedsformer/overblik_over_virksomhedsformer/interessentskab_i_s/"
+        href="https://virksomhedsguiden.dk/content/ydelser/interessentskab-is/22bbdee2-4023-4b05-aa22-ce9c45d3e9f0/"
         rel="noopener noreferrer nofollow"
         >Læs mere om I/S</a
       >

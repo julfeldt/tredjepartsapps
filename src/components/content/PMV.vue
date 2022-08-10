@@ -20,7 +20,7 @@
     <p>
       <a
         target="_blank"
-        href="https://virksomhedsguiden.dk/content/artikler/virksomhedsformer/overblik_over_virksomhedsformer/personligt_ejet_mindre_virksomhed_pmv/"
+        href="https://virksomhedsguiden.dk/content/ydelser/personligt-ejet-mindre-virksomhed-pmv/515861e9-b3ed-4c4c-8284-643e4ff45c15/"
         rel="noopener noreferrer nofollow"
         >Læs mere om PMV</a
       >
@@ -67,7 +67,7 @@
     <p>
       <a
         target="_blank"
-        href="https://virksomhedsguiden.dk/content/artikler/skat_og_moms/moms_og_loensumsafgift/momsfritagelse_og_loensumsafgift/"
+        href="https://virksomhedsguiden.dk/content/ydelser/momsfritagelse-og-loensumsafgift/ed74d1a8-fe3a-4ece-b96d-3c5f5b665797/"
         rel="noopener noreferrer nofollow"
         >Læs mere om momsfritagelse og lønsumsafgift</a
       >

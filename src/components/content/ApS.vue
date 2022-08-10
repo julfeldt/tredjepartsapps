@@ -17,7 +17,7 @@
     <p>
       <a
         target="_blank"
-        href="https://virksomhedsguiden.dk/content/artikler/virksomhedsformer/overblik_over_virksomhedsformer/anpartsselskab_aps/"
+        href="https://virksomhedsguiden.dk/content/ydelser/anpartsselskab-aps/7242321c-f707-4006-9791-f701712783bd/"
         rel="noopener noreferrer nofollow"
         >Læs mere om ApS</a
       >

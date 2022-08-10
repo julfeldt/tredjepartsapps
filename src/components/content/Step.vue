@@ -1,16 +1,16 @@
 <template>
   <div class="step col-lg-7">
-    <h2 class="h1">{{ titles[step] }}</h2>
+    <h2 class="h1">{{ $t(titles[step]) }}</h2>
     <div class="form-group mt-8">
       <fieldset>
         <ul class="nobullet-list">
           <div class="form-group-radio">
             <li v-for="answer in guideAnswer" :id="`li-${answer}`" :key="answer" class="mt-3">
               <input :id="`radio-${answer}`" type="radio" name="radio" :value="answer" class="form-radio radio-large" @click="chosen = answer" />
-              <label :for="`radio-${answer}`">{{ answers[step][answer] }}</label>
+              <label :for="`radio-${answer}`">{{ $t(answers[step][answer]) }}</label>
               <div v-if="alerts[step][answer] && chosen === answer" role="alert" class="alert alert-info">
                 <div class="alert-body">
-                  <p class="alert-text">{{ alerts[step][answer] }}</p>
+                  <p class="alert-text">{{ $t(alerts[step][answer]) }}</p>
                 </div>
               </div>
             </li>
@@ -48,24 +48,24 @@ export default {
       titles,
       answers: {
         [GuideStep.STEP_1]: {
-          [GuideAnswer.FIRST]: 'Jeg skal eje virksomheden alene',
-          [GuideAnswer.SECOND]: 'Vi skal være flere ejere'
+          [GuideAnswer.FIRST]: 'vaelg-virksomhedsform.sporgsmaal.step-1.svar-a',
+          [GuideAnswer.SECOND]: 'vaelg-virksomhedsform.sporgsmaal.step-1.svar-b'
         },
         [GuideStep.STEP_2_EN]: {
-          [GuideAnswer.FIRST]: 'Ja',
-          [GuideAnswer.SECOND]: 'Nej'
+          [GuideAnswer.FIRST]: 'vaelg-virksomhedsform.sporgsmaal.step-2-en.svar-a',
+          [GuideAnswer.SECOND]: 'vaelg-virksomhedsform.sporgsmaal.step-2-en.svar-b'
         },
         [GuideStep.STEP_2_FLERE]: {
-          [GuideAnswer.FIRST]: 'Ja',
-          [GuideAnswer.SECOND]: 'Nej'
+          [GuideAnswer.FIRST]: 'vaelg-virksomhedsform.sporgsmaal.step-2-flere.svar-a',
+          [GuideAnswer.SECOND]: 'vaelg-virksomhedsform.sporgsmaal.step-2-flere.svar-b'
         },
         [GuideStep.STEP_3_JA]: {
-          [GuideAnswer.FIRST]: 'Ja',
-          [GuideAnswer.SECOND]: 'Nej'
+          [GuideAnswer.FIRST]: 'vaelg-virksomhedsform.sporgsmaal.step-3-en.svar-a',
+          [GuideAnswer.SECOND]: 'vaelg-virksomhedsform.sporgsmaal.step-3-en.svar-b'
         },
         [GuideStep.STEP_3_NEJ]: {
-          [GuideAnswer.FIRST]: 'Mellem 40.000 og 399.999 kr.',
-          [GuideAnswer.SECOND]: '400.000 kr. eller mere'
+          [GuideAnswer.FIRST]: 'vaelg-virksomhedsform.sporgsmaal.step-3-flere.svar-a',
+          [GuideAnswer.SECOND]: 'vaelg-virksomhedsform.sporgsmaal.step-3-flere.svar-b'
         }
       },
       alerts: {
@@ -74,12 +74,12 @@ export default {
           [GuideAnswer.SECOND]: ''
         },
         [GuideStep.STEP_2_EN]: {
-          [GuideAnswer.FIRST]: 'Ja. Du risikerer personligt at skulle betale virksomhedens eventuelle gæld.',
-          [GuideAnswer.SECOND]: 'Nej. Dette medfører flere krav fra det offentlige, fx skal din virksomheds regnskab offentliggøres.'
+          [GuideAnswer.FIRST]: 'vaelg-virksomhedsform.sporgsmaal.step-2-en.alert-a',
+          [GuideAnswer.SECOND]: 'vaelg-virksomhedsform.sporgsmaal.step-2-en.alert-b'
         },
         [GuideStep.STEP_2_FLERE]: {
-          [GuideAnswer.FIRST]: 'Ja. I risikerer personligt at skulle betale virksomhedens gæld.',
-          [GuideAnswer.SECOND]: 'Nej. Dette medfører flere krav fra det offentlige, fx skal virksomhedens regnskab offentliggøres.'
+          [GuideAnswer.FIRST]: 'vaelg-virksomhedsform.sporgsmaal.step-2-flere.alert-a',
+          [GuideAnswer.SECOND]: 'vaelg-virksomhedsform.sporgsmaal.step-2-flere.alert-b'
         },
         [GuideStep.STEP_3_JA]: {
           [GuideAnswer.FIRST]: '',
